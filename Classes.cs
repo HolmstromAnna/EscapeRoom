@@ -6,6 +6,7 @@ class Question
     public string Answer;
     public string PathChoice;
     public Room NextRoom;   //hur sätter vi om till nästa rum? +1 och new?
+    
     public Question(string questiontext, string answer, string pathChoice, Room nextRoom) 
     {
         QuestionText = questiontext;
