@@ -2,10 +2,9 @@
 using Microsoft.VisualBasic;
 class Program
 {
-    public static int playerLives = 5;
     static void Main(string[] args)
     {   
-        int playerLives = 5;
+        int playerLives = 2;
         Room room1 = new Room("", new List<Question>());
         Room room2 = new Room("", new List<Question>());
         room1.Description = "        ‡        Du kliver in i rummet, där ser du en obäddad säng tvärs över rummet.      ‡ \n        ‡         Till höger ser du en kamin med en blodig handduk hängande på tork.       ‡ \n        ‡            Till vänster ser du ett skrivbord med en uppslagen karta.             ‡ \n        ‡ Dörren bakom dig slår igen och låser sig. Nu behöver du hitta en annan väg ut... ‡ ";
@@ -16,6 +15,7 @@ class Program
         room2.Questions.Add(new Question("Vad heter Supermarios bror? \nA. Ludwig \nB. Pepparoni \nC. Luigi \nD. Bowser", "c", " Supernintendo", room1));
         room2.Questions.Add(new Question("Vad har TV-spelsfiguren Pacman för färg? \nA. Grön \nB. Vit \nC. Röd \nD. Gul", "d", " Tv:n", room1));
         room2.Questions.Add(new Question("Vad heter hjälten i spelen Zelda? \nA. Link \nB. Law \nC. Mario \nD. Hero", "a", " Byrån", room1));
+        room2.Questions.Add(new Question("Du går till skrivbordet och ser en låda, vill du öppna den? j/n?", "j", " Skrivbord", room2));
         
         bool isLooping = true;
         Room currentRoom = room1;
@@ -35,24 +35,32 @@ class Program
 
                     int userChoice = int.Parse(Console.ReadLine());
                     
-                    Console.WriteLine(currentRoom.Questions[userChoice -1].QuestionText); // Skriver ut alla frågor
+                    Console.WriteLine(currentRoom.Questions[userChoice -1].QuestionText); // Skriver ut rätt fråga
 
                     Console.Write("Ditt val: ");
                     string? userAns = Console.ReadLine();
-                    if (currentRoom.Questions[userChoice -1].CheckAnswer(userAns.ToLower()) == true)
-                    {
+                    if (currentRoom.Questions[userChoice -1].CheckAnswer(userAns.ToLower()) == true) // Kollar om input är korrekt.
+                    { 
                         Console.WriteLine();
                         Console.WriteLine("Rätt!");
-                        currentRoom = currentRoom.Questions[userChoice -1].NextRoom;
+                        currentRoom = currentRoom.Questions[userChoice -1].NextRoom; // Går vidare till nästa rum
                         break;
                     }
                     else
                     {
                         Console.WriteLine("Fel");
-                        playerLives--;
-                        Console.WriteLine($"Du har nu {playerLives} liv kvar...");
-                        Console.WriteLine();
-                        break;
+                        if (playerLives == 1) //Har du inga liv kvar så är det gameover
+                        {
+                            Console.WriteLine("GAME OVER!");
+                            return;
+                        }
+                        else
+                        {
+                            playerLives--;
+                            Console.WriteLine($"Du har nu {playerLives} liv kvar...");
+                            Console.WriteLine();
+                            break;
+                        }
                     }
                 case "2":
                     Console.WriteLine("Hejdå");

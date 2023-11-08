@@ -1,12 +1,12 @@
 using System.Runtime.CompilerServices;
 
-class Question
+public class Question
 {
     public string QuestionText;
     public string Answer;
     public string PathChoice;
     public Room NextRoom;   //hur sätter vi om till nästa rum? +1 och new?
-    
+
     public Question(string questiontext, string answer, string pathChoice, Room nextRoom) 
     {
         QuestionText = questiontext;
@@ -22,7 +22,21 @@ class Question
             return false;
     }
 }
-class Room
+/*
+public class RedHerring
+{
+    public string Blabla;
+    public string PathChoice;
+    public Room NextRoom;
+    public RedHerring(string blabla, string pathChoice, Room nextRoom) 
+    {
+        Blabla = blabla;
+        PathChoice = pathChoice;
+        NextRoom = nextRoom;
+    }
+
+}*/
+public class Room
 {
     public string Description;
     public List <Question> Questions;
