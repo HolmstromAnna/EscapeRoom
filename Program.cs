@@ -4,11 +4,13 @@ class Program
 {
     static void Main(string[] args)
     {   
+        
         int playerLives = 2;
         Room room1 = new Room("", new List<Question>());
         Room room2 = new Room("", new List<Question>());
+        Room currentRoom = room1;
         room1.Description = "        ‡        Du kliver in i rummet, där ser du en obäddad säng tvärs över rummet.      ‡ \n        ‡         Till höger ser du en kamin med en blodig handduk hängande på tork.       ‡ \n        ‡            Till vänster ser du ett skrivbord med en uppslagen karta.             ‡ \n        ‡ Dörren bakom dig slår igen och låser sig. Nu behöver du hitta en annan väg ut... ‡ ";
-        room1.Questions.Add(new Question("Vilket var den vanligaste typen av mordvapen i Sverige 2022? \nA. Kniv \nB. Pilbåge \nC. Skjutvapen", "c", " Säng", room2));
+        room1.Questions.Add(new Question("Vilket var den vanligaste typen av mordvapen i Sverige 2022? \nA. Kniv \nB. Pilbåge \nC. Skjutvapen", "c", " Säng", currentRoom));
         room1.Questions.Add(new Question("Hur många år i snitt sitter en livstidsdömd person i fängelse i Sverige? \nA. 20 \nB. 16 \nC. 10", "b", " Kamin", room2));
 
         room2.Description = "        §        Du tar ett steg in i rummet, där ser du en säng, ett skrivbord och en TV som brusar med myrornas krig.       § \n        §    Under TV:n ser du ett gammalt supernintendo med två kontroller ikopplade och framför TV:n ligger en sackosäck.   § \n        §                    Dörren bakom dig stängs och låser sig. Nu behöver du hitta en annan väg ut...                    § ";
@@ -18,8 +20,7 @@ class Program
         room2.Questions.Add(new Question("Du går till skrivbordet och ser en låda, vill du öppna den? j/n?", "j", " Skrivbord", room2));
         
         bool isLooping = true;
-        Room currentRoom = room1;
-
+        
         Console.WriteLine("1. Play");
         Console.WriteLine("2. Exit");
         string? input = Console.ReadLine(); // Spelaren väljer fråga

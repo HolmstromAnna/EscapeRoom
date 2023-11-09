@@ -1,41 +1,33 @@
 using System.Runtime.CompilerServices;
 
-public class Question
+public abstract class Things    //ett bättre namn?
 {
-    public string QuestionText;
-    public string Answer;
-    public string PathChoice;
-    public Room NextRoom;   //hur sätter vi om till nästa rum? +1 och new?
-
-    public Question(string questiontext, string answer, string pathChoice, Room nextRoom) 
-    {
-        QuestionText = questiontext;
-        Answer = answer;
-        PathChoice = pathChoice;
-        NextRoom = nextRoom;
-    }
-    public virtual bool CheckAnswer(string userAnswer)
-    {
-         if(userAnswer == Answer)
-            return true;
-        else
-            return false;
-    }
-}
-/*
-public class RedHerring
-{
-    public string Blabla;
+    public string Description;
     public string PathChoice;
     public Room NextRoom;
-    public RedHerring(string blabla, string pathChoice, Room nextRoom) 
+    public Things (string description, string pathChoice, Room nextRoom)
     {
-        Blabla = blabla;
+        Description = description;
         PathChoice = pathChoice;
         NextRoom = nextRoom;
     }
 
-}*/
+    public abstract void Interact();
+}
+
+public class DeadEnd : Things
+{
+    public DeadEnd (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
+    }
+    public override void Interact()
+    {
+        Console.WriteLine(Description);
+        Console.WriteLine("Här finns ingenting.");
+        //NextRoom = currentRoom;       ??????
+    }
+}
+
+
 public class Room
 {
     public string Description;
