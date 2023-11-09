@@ -1,4 +1,5 @@
 using System.Formats.Asn1;
+using System.Net;
 using System.Runtime.CompilerServices;
 
 public abstract class Thing    //ett bättre namn?
@@ -22,8 +23,9 @@ public class DeadEnd : Thing
     }
     public override void Interact()
     {
-        Console.WriteLine(Description);
-        Console.WriteLine("Här finns ingenting.");
+        //Console.WriteLine(Description);
+        
+        Console.WriteLine("här finns ingenting.");
         //NextRoom = currentRoom;       ??????
     }
 }
@@ -37,18 +39,21 @@ public class Question : Thing
     }
     public override void Interact()
     {
-        Console.WriteLine(Description);
+        //Console.WriteLine(Description);
         Console.Write("Ditt val: ");
         string? userAns = Console.ReadLine();
         if(userAns == CorrectAnswer)
         {
             Console.WriteLine();
             Console.WriteLine("Rätt!");
+            return;
+            //Vi behöver komma till nästa rum också...
         }
         else
         {
             Console.WriteLine();
             Console.WriteLine("Fel");
+            //currentRoom = currentRoom;
         }
     }
 }
@@ -62,9 +67,5 @@ public class Room
     {
         RoomDescription = roomDescription;
         Things = things;
-    }
-    public virtual bool CheckAnswer(string userAnswer)
-    {
-        return true;
     }
 }
