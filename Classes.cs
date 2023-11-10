@@ -13,19 +13,16 @@ public abstract class Thing    //ett bättre namn?
         PathChoice = pathChoice;
         NextRoom = nextRoom;
     }
-    public abstract Room Interact(Room currentRoom);
+    public abstract (Room, int playerLives) Interact(Room currentRoom, int playerLives);
 }
-
 public class DeadEnd : Thing
 {
     public DeadEnd (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
     }
-    public override Room Interact(Room currentRoom)
-    {
-        //Console.WriteLine(Description);
-        
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives)
+    {        
         Console.WriteLine("här finns ingenting.");
-        return currentRoom;
+        return (currentRoom, playerLives);
     }
 }
 public class Question : Thing
@@ -36,29 +33,26 @@ public class Question : Thing
     {
         CorrectAnswer = correctAnswer;
     }
-    public override Room Interact(Room currentRoom)
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives)
     {
-        //Console.WriteLine(Description);
         Console.Write("Ditt val: ");
         string? userAns = Console.ReadLine();
         if(userAns == CorrectAnswer)
         {
             Console.WriteLine();
             Console.WriteLine("Rätt!");
-            //currentRoom = NextRoom;
-            return NextRoom;
-            //Vi behöver komma till nästa rum också...
+            return (NextRoom, playerLives);
         }
         else
         {
             Console.WriteLine();
             Console.WriteLine("Fel");
-            return currentRoom;
+            playerLives--;
+            Console.WriteLine($"Du har nu {playerLives} liv kvar...");
+            return (currentRoom, playerLives);
         }
     }
 }
-
-
 public class Room
 {
     public string RoomDescription;

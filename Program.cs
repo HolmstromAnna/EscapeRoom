@@ -6,7 +6,6 @@ class Program
 {
     static void Main(string[] args)
     {   
-        
         bool isLooping = true;
         
         Console.WriteLine("1. Play");
@@ -39,11 +38,11 @@ class Program
                     for (int i = 0; i < currentRoom.Things.Count; i++)
                         Console.WriteLine(i+1 + "." + currentRoom.Things[i].PathChoice); // Skriver ut vägval
 
-                    int userChoice = int.Parse(Console.ReadLine());
+                    int userChoice = int.Parse(Console.ReadLine()+"");
                     
                     Console.WriteLine(currentRoom.Things[userChoice -1].Description); // Skriver ut rätt fråga / beskrivning(dead end)
-                    currentRoom = currentRoom.Things[userChoice -1].Interact(currentRoom);  //Går in i Question.Interact och kollar om det är rätt eller fel
-
+                    (currentRoom, playerLives) = currentRoom.Things[userChoice -1].Interact(currentRoom, playerLives);  //Går in i Question.Interact och kollar om det är rätt eller fel
+                    
                     break;
                 case "2":
                     Console.WriteLine("Hejdå");
