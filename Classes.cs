@@ -13,20 +13,19 @@ public abstract class Thing    //ett bättre namn?
         PathChoice = pathChoice;
         NextRoom = nextRoom;
     }
-
-    public abstract void Interact();
+    public abstract Room Interact(Room currentRoom);
 }
 
 public class DeadEnd : Thing
 {
     public DeadEnd (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
     }
-    public override void Interact()
+    public override Room Interact(Room currentRoom)
     {
         //Console.WriteLine(Description);
         
         Console.WriteLine("här finns ingenting.");
-        //NextRoom = currentRoom;       ??????
+        return currentRoom;
     }
 }
 public class Question : Thing
@@ -37,7 +36,7 @@ public class Question : Thing
     {
         CorrectAnswer = correctAnswer;
     }
-    public override void Interact()
+    public override Room Interact(Room currentRoom)
     {
         //Console.WriteLine(Description);
         Console.Write("Ditt val: ");
@@ -46,14 +45,15 @@ public class Question : Thing
         {
             Console.WriteLine();
             Console.WriteLine("Rätt!");
-            return;
+            //currentRoom = NextRoom;
+            return NextRoom;
             //Vi behöver komma till nästa rum också...
         }
         else
         {
             Console.WriteLine();
             Console.WriteLine("Fel");
-            //currentRoom = currentRoom;
+            return currentRoom;
         }
     }
 }
