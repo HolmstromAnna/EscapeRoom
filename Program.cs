@@ -12,7 +12,7 @@ class Program
         Console.WriteLine("2. Exit");
         string input = Console.ReadLine()+""; // Spelaren väljer fråga
         
-        int playerLives = 5;
+        int playerLives = 2;
         Room room1 = new Room("", new List<Thing>());
         Room room2 = new Room("", new List<Thing>());
         Room currentRoom = room1;
@@ -42,7 +42,10 @@ class Program
                     
                     Console.WriteLine(currentRoom.Things[userChoice -1].Description); // Skriver ut rätt fråga / beskrivning(dead end)
                     (currentRoom, playerLives) = currentRoom.Things[userChoice -1].Interact(currentRoom, playerLives);  //Går in i Question.Interact och kollar om det är rätt eller fel
-                    
+                    if(playerLives == 0)
+                    {
+                        isLooping = false;          //Ska vi göra såhär eller tillbaka till Play/Exit??
+                    }
                     break;
                 case "2":
                     Console.WriteLine("Hejdå");

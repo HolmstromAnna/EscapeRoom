@@ -47,6 +47,12 @@ public class Question : Thing
         {
             Console.WriteLine();
             Console.WriteLine("Fel");
+            if(playerLives == 1)
+             {
+                playerLives--;
+                Console.WriteLine("GAME OVER!");        
+                return (currentRoom, playerLives);
+             }
             playerLives--;
             Console.WriteLine($"Du har nu {playerLives} liv kvar...");
             return (currentRoom, playerLives);
