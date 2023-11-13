@@ -1,7 +1,6 @@
 using System.Formats.Asn1;
 using System.Net;
 using System.Runtime.CompilerServices;
-
 public abstract class Thing    //ett bättre namn?
 {
     public string Description;
@@ -15,6 +14,7 @@ public abstract class Thing    //ett bättre namn?
     }
     public abstract (Room, int playerLives) Interact(Room currentRoom, int playerLives);
 }
+
 public class DeadEnd : Thing
 {
     public DeadEnd (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
@@ -27,6 +27,7 @@ public class DeadEnd : Thing
         return (currentRoom, playerLives);
     }
 }
+
 public class BadLuck : Thing
 {
     public BadLuck (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
@@ -41,6 +42,7 @@ public class BadLuck : Thing
         return (currentRoom, playerLives);
     }
 }
+
 public class Surprise : Thing
 {
     public Surprise (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
@@ -62,10 +64,10 @@ public class Surprise : Thing
         return (currentRoom, playerLives);
     }
 }
+
 public class Question : Thing
 {
     public string CorrectAnswer;
-
     public Question (string description, string correctAnswer, string pathChoice, Room nextRoom) :base(description, pathChoice, nextRoom)
     {
         CorrectAnswer = correctAnswer;
@@ -97,6 +99,7 @@ public class Question : Thing
         }
     }
 }
+
 public class Room
 {
     public string RoomDescription;
