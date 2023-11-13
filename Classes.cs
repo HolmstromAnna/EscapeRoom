@@ -22,6 +22,43 @@ public class DeadEnd : Thing
     public override (Room, int playerLives) Interact(Room currentRoom, int playerLives)
     {        
         Console.WriteLine("här finns ingenting.");
+        Console.WriteLine();
+        Console.ReadLine();
+        return (currentRoom, playerLives);
+    }
+}
+public class BadLuck : Thing
+{
+    public BadLuck (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
+    }
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives)
+    {        
+        Console.WriteLine("Du förlorar ett liv...");
+        playerLives--;
+        Console.WriteLine($"Otur, du har nu bara {playerLives} liv kvar...");
+        Console.WriteLine();
+        Console.ReadLine();
+        return (currentRoom, playerLives);
+    }
+}
+public class Surprise : Thing
+{
+    public Surprise (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
+    }
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives)
+    {        
+        Console.WriteLine("Woho, du hittar ett liv!");
+        if (playerLives == 5)
+        {
+            Console.WriteLine("Du kan bara ha fem liv");
+        }
+        else
+        {
+            playerLives++;
+            Console.WriteLine($"Du har nu {playerLives} liv!");
+        }
+        Console.WriteLine();
+        Console.ReadLine();
         return (currentRoom, playerLives);
     }
 }
@@ -46,11 +83,12 @@ public class Question : Thing
         else
         {
             Console.WriteLine();
-            Console.WriteLine("Fel");
+            Console.WriteLine("Fel svar");
             if(playerLives == 1)
              {
                 playerLives--;
-                Console.WriteLine("GAME OVER!");        
+                Console.WriteLine("GAME OVER!");
+                Console.WriteLine();     
                 return (currentRoom, playerLives);
              }
             playerLives--;
