@@ -16,18 +16,24 @@ class Program
         Console.WriteLine("---------------------------------------------------");
         Console.ReadLine();
 
+        //Börjar med att skriva in sitt namn (Vad gör vi med namnet?) Namnet och tid hänger ihop
+        //med samma index. Klass user/highscore
+        //Användare med namn och tid (utökad item)
+        //Måste vinna för att vara med på highscore-lista
+
         while (fromStart)
         {
             Console.WriteLine("1. Spela");
-            Console.WriteLine("2. Avsluta");
-            string? input = Console.ReadLine(); // Spelaren väljer fråga
+            Console.WriteLine("2. Highscore");
+            Console.WriteLine("3. Avsluta");
+            string? input = Console.ReadLine();     // Spelaren väljer fråga
 
             int playerLives = 5;
             Room room1 = new Room("", new List<Thing>());
             Room room2 = new Room("", new List<Thing>());
             Room room3 = new Room("", new List<Thing>());
             Room currentRoom = room1;
-            string item = "Berlock";    //??
+            string item = "Berlock";        //??
 
             room1.RoomDescription = "        ‡        Du kliver in i rummet, där ser du en obäddad säng tvärs över rummet.      ‡ \n        ‡         Till höger ser du en kamin med en blodig handduk hängande på tork.       ‡ \n        ‡            Till vänster ser du ett skrivbord med en uppslagen karta.             ‡ \n        ‡ Dörren bakom dig slår igen och låser sig. Nu behöver du hitta en annan väg ut... ‡ ";
             room1.Things.Add(new Question("Vilket var den vanligaste typen av mordvapen i Sverige 2022? \nA. Kniv \nB. Pilbåge \nC. Skjutvapen", "c", " Säng", room2));
@@ -52,11 +58,12 @@ class Program
                         int start = Environment.TickCount;
                         while (isLooping)
                         {
-                            
                             if(currentRoom == null)
                             {
                                 //Skriv en rumsbeskrivning på sista rummet
                                 Console.WriteLine("Grattis! Du har klarat av alla frågor och vunnit spelet!");
+                                int total = Environment.TickCount - start;     
+                                Console.WriteLine((total/1000) + " sekunder");      //Skriv namn
                                 isLooping = false;
                                 fromStart = false;
                             }
@@ -78,10 +85,10 @@ class Program
                             (currentRoom, playerLives) = currentRoom.Things[userChoice -1].Interact(currentRoom, playerLives, item);  //Går in i Question.Interact och kollar om det är rätt eller fel
                             }
                         }
-                        int total = Environment.TickCount - start;     
-                        Console.WriteLine((total/1000) + " sekunder");
                         break;
                     case "2":
+                        break;
+                    case "3":
                         Console.WriteLine("Hejdå");
                         Console.WriteLine();
                         isLooping = false;
@@ -91,8 +98,6 @@ class Program
                         Console.WriteLine("Men kom igen! Välj en siffra...");
                         break;
                 }
-                //int total = Environment.TickCount - start;        WHERE DO YOU GO????
-                //Console.WriteLine((total/1000) + " sekunder");
             }
         }
     }

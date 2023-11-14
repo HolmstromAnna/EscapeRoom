@@ -115,11 +115,10 @@ public class Backpack : Thing
 {
     public string Item;
     public List<string> Items;
-    public Backpack (string description, string pathChoice, Room nextRoom, string item/*, List<Backpack> items*/) : base(description, pathChoice, nextRoom)
+    public Backpack (string description, string pathChoice, Room nextRoom, string item) : base(description, pathChoice, nextRoom)
     {
         Item = item;
         Items = new List<string>();
-        //Items = items;
     }
     public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
     {        
