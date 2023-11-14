@@ -104,14 +104,12 @@ public class Room
 {
     public string RoomDescription;
     public List <Thing> Things; 
-    //public List<Backpack> Items;
     public Room (string roomDescription, List <Thing> things)
     {
         RoomDescription = roomDescription;
         Things = things;
     }
 }
-
 
 public class Backpack : Thing
 {
@@ -120,27 +118,26 @@ public class Backpack : Thing
     public Backpack (string description, string pathChoice, Room nextRoom, string item/*, List<Backpack> items*/) : base(description, pathChoice, nextRoom)
     {
         Item = item;
+        Items = new List<string>();
         //Items = items;
     }
     public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
     {        
-        List<string> items = new List<string>();
-        //bool found = false;
-        Console.WriteLine($"Woho, du hittar {Item}");
-        
-        if (items.Contains(Item))
+        Console.ReadKey();
+        //Thread.Sleep(5000);
+        Console.WriteLine($"Woohoo! Du hittade: {Item}");
+        if (Items.Contains(Item))
         {
-            Console.WriteLine("Du kan bara ha en/ett i din ryggsäck");
+            Console.WriteLine($"Du har redan hittat föremålet som fanns här!");
         }
         else
         {
-            items.Add(Item);
-            Console.WriteLine($"Du har nu ett {Item} i din ryggsäck!");
+            Items.Add(Item);
+            Console.WriteLine($"Tillagd i ryggäcken: {Item}.");
         }
-        
-        
-        Console.WriteLine();
-        Console.ReadLine();
+        Console.ReadKey();
+        //Thread.Sleep(6000);
+        Console.WriteLine("---------------------------------------------------");
         return (currentRoom, playerLives);
     }
 }

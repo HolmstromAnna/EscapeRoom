@@ -14,21 +14,20 @@ class Program
         Console.WriteLine("---------------------------------------------------");
         Console.WriteLine("Välkommen!\n\nHoppas du kan svara på lite frågor. Du har 5 liv, använd dom väl! \nDet finns olika utmaningar med flera rum i vardera att klara av. \nVarje rum har olika svårighetsgrad. \nDu kommer även stå inför olika val. Se till att välja rätt annars förlorar du. \nTryck enter för att börja.");
         Console.WriteLine("---------------------------------------------------");
-        Console.WriteLine();
         Console.ReadLine();
 
         while (fromStart)
         {
-            Console.WriteLine("1. Play");
-            Console.WriteLine("2. Exit");
+            Console.WriteLine("1. Spela");
+            Console.WriteLine("2. Avsluta");
             string? input = Console.ReadLine(); // Spelaren väljer fråga
 
-            int playerLives = 1;
+            int playerLives = 5;
             Room room1 = new Room("", new List<Thing>());
             Room room2 = new Room("", new List<Thing>());
             Room room3 = new Room("", new List<Thing>());
             Room currentRoom = room1;
-            string item = "Berlock";
+            string item = "Berlock";    //??
 
             room1.RoomDescription = "        ‡        Du kliver in i rummet, där ser du en obäddad säng tvärs över rummet.      ‡ \n        ‡         Till höger ser du en kamin med en blodig handduk hängande på tork.       ‡ \n        ‡            Till vänster ser du ett skrivbord med en uppslagen karta.             ‡ \n        ‡ Dörren bakom dig slår igen och låser sig. Nu behöver du hitta en annan väg ut... ‡ ";
             room1.Things.Add(new Question("Vilket var den vanligaste typen av mordvapen i Sverige 2022? \nA. Kniv \nB. Pilbåge \nC. Skjutvapen", "c", " Säng", room2));
@@ -78,7 +77,6 @@ class Program
                             Console.WriteLine(currentRoom.Things[userChoice -1].Description); // Skriver ut rätt fråga / beskrivning(dead end)
                             (currentRoom, playerLives) = currentRoom.Things[userChoice -1].Interact(currentRoom, playerLives, item);  //Går in i Question.Interact och kollar om det är rätt eller fel
                             }
-                            
                         }
                         int total = Environment.TickCount - start;     
                         Console.WriteLine((total/1000) + " sekunder");
