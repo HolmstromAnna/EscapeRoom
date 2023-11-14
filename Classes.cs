@@ -21,7 +21,7 @@ public class DeadEnd : Thing
     }
     public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
     {        
-        Console.WriteLine("här finns ingenting.");
+        Console.Write(" Här finns ingenting.");
         Console.WriteLine();
         Console.ReadLine();
         return (currentRoom, playerLives);
@@ -136,7 +136,7 @@ public class Backpack : Thing
         }
         Console.ReadKey();
         //Thread.Sleep(6000);
-        Console.WriteLine("---------------------------------------------------");
+        Console.WriteLine();
         return (currentRoom, playerLives);
     }
 }
