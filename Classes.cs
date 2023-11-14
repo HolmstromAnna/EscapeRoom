@@ -12,14 +12,14 @@ public abstract class Thing    //ett bättre namn?
         PathChoice = pathChoice;
         NextRoom = nextRoom;
     }
-    public abstract (Room, int playerLives) Interact(Room currentRoom, int playerLives);
+    public abstract (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item);
 }
 
 public class DeadEnd : Thing
 {
     public DeadEnd (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
     }
-    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives)
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
     {        
         Console.WriteLine("här finns ingenting.");
         Console.WriteLine();
@@ -32,7 +32,7 @@ public class BadLuck : Thing
 {
     public BadLuck (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
     }
-    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives)
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
     {        
         Console.WriteLine("Du förlorar ett liv...");
         playerLives--;
@@ -47,7 +47,7 @@ public class Surprise : Thing
 {
     public Surprise (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
     }
-    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives)
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
     {        
         Console.WriteLine("Woho, du hittar ett liv!");
         if (playerLives == 5)
@@ -72,7 +72,7 @@ public class Question : Thing
     {
         CorrectAnswer = correctAnswer;
     }
-    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives)
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
     {
         Console.Write("Ditt val: ");
         string? userAns = Console.ReadLine();
@@ -104,19 +104,43 @@ public class Room
 {
     public string RoomDescription;
     public List <Thing> Things; 
-    public bool isLastRoom;
-    // bool för att kolla om det är finalRoom
+    //public List<Backpack> Items;
     public Room (string roomDescription, List <Thing> things)
     {
         RoomDescription = roomDescription;
         Things = things;
     }
-    public static void CheckFinalRoom(Room currentRoom, Room finalRoom, bool isLooping)
+}
+
+
+public class Backpack : Thing
+{
+    public string Item;
+    public List<string> Items;
+    public Backpack (string description, string pathChoice, Room nextRoom, string item/*, List<Backpack> items*/) : base(description, pathChoice, nextRoom)
     {
-        if(currentRoom == finalRoom)
-        {   
-            Console.WriteLine("Grattis!");
-            isLooping = false;
+        Item = item;
+        //Items = items;
+    }
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
+    {        
+        List<string> items = new List<string>();
+        //bool found = false;
+        Console.WriteLine($"Woho, du hittar {Item}");
+        
+        if (items.Contains(Item))
+        {
+            Console.WriteLine("Du kan bara ha en/ett i din ryggsäck");
         }
+        else
+        {
+            items.Add(Item);
+            Console.WriteLine($"Du har nu ett {Item} i din ryggsäck!");
+        }
+        
+        
+        Console.WriteLine();
+        Console.ReadLine();
+        return (currentRoom, playerLives);
     }
 }
