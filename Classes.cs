@@ -5,8 +5,8 @@ public abstract class Thing    //ett bättre namn?
 {
     public string Description;
     public string PathChoice;
-    public Room NextRoom;
-    public Thing (string description, string pathChoice, Room nextRoom)
+    public Room? NextRoom;
+    public Thing (string description, string pathChoice, Room? nextRoom)
     {
         Description = description;
         PathChoice = pathChoice;
@@ -103,10 +103,20 @@ public class Question : Thing
 public class Room
 {
     public string RoomDescription;
-    public List <Thing> Things;
+    public List <Thing> Things; 
+    public bool isLastRoom;
+    // bool för att kolla om det är finalRoom
     public Room (string roomDescription, List <Thing> things)
     {
         RoomDescription = roomDescription;
         Things = things;
+    }
+    public static void CheckFinalRoom(Room currentRoom, Room finalRoom, bool isLooping)
+    {
+        if(currentRoom == finalRoom)
+        {   
+            Console.WriteLine("Grattis!");
+            isLooping = false;
+        }
     }
 }
