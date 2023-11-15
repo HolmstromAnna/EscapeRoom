@@ -140,3 +140,50 @@ public class Backpack : Thing
         return (currentRoom, playerLives);
     }
 }
+public class Highscore
+{
+    public string UserName;
+    public int Minutes; 
+    public int Seconds;
+    List <Highscore> Highscores;
+
+    public Highscore(string userName, int minutes, int seconds)
+    {
+        UserName = userName;
+        Minutes = minutes;
+        Seconds = seconds;
+        
+        Highscores = new List<Highscore>(5);
+    }
+    public void Add(int start)
+    {
+        int totalMillisec = Environment.TickCount - start; 
+        int totalSeconds = totalMillisec / 1000;
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+
+        Console.WriteLine($"Tid: {minutes} minuter {seconds} sekunder"); 
+        Console.Write("Skriv in ditt namn: ");
+        UserName = Console.ReadLine();
+
+    }
+
+
+    
+}
+
+
+
+
+
+/* public void Add(string playerName, int playerPoints)
+    {
+        var newItem = new HSItem(playerName, playerPoints);
+        hs.Add(newItem);
+
+        hs.Sort((x, y) => y.points.CompareTo(x.points));
+
+        if (hs.Count > maxInList)
+        {
+            hs.RemoveAt(maxInList);
+        }*/

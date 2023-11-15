@@ -58,7 +58,7 @@ class Program
             
             room2.RoomDescription = "        ----------------------------------------------------------------------------------------\n        §         Du ser en säng, ett skrivbord och en TV som brusar med myrornas krig.        § \n        §       Under TV:n ser du ett gammalt supernintendo med två kontroller ikopplade.      § \n        §                           Framför TV:n ligger en sackosäck.                          § \n        §  Dörren bakom dig har slagit igen och låst sig. Du behöver hitta en annan väg ut...  § \n        ----------------------------------------------------------------------------------------";
             
-            room2.Things.Add(new Question("Vad heter Supermarios bror? \nA. Ludwig \nB. Pepparoni \nC. Luigi \nD. Bowser", "c", " Gå fram och kika på Supernintendot.", room3));
+            room2.Things.Add(new Question("Vad heter Supermarios bror? \nA. Ludwig \nB. Pepparoni \nC. Luigi \nD. Bowser", "c", " Gå fram och kika på Supernintendot.", null));
             room2.Things.Add(new Question("Vad har TV-spelsfiguren Pacman för färg? \nA. Grön \nB. Vit \nC. Röd \nD. Gul", "d", " Starta upp Tv:n.", room3));
             room2.Things.Add(new Question("Vad heter hjälten i spelen Zelda? \nA. Link \nB. Law \nC. Mario \nD. Hero", "a", " Leta igenom byrån.", room3));
             room2.Things.Add(new BadLuck("Du går till anslagstavlan och ser ett födelsedagskort...", " Gå fram till anslagstavlan över skrivbordet", room2));
@@ -94,10 +94,10 @@ class Program
                         {
                             if(currentRoom == null)
                             {
-                                //Skriv en rumsbeskrivning på sista rummet
                                 Console.WriteLine("Grattis! Du har klarat av alla frågor och vunnit spelet!");
-                                int total = Environment.TickCount - start;     
-                                Console.WriteLine((total/1000) + " sekunder");      //Skriv namn
+                                Highscore highscoreInstance = new Highscore("", 0, 0);
+                                highscoreInstance.Add(start);
+                                // Skriv ut hur många items man hittat 
                                 isLooping = false;
                                 fromStart = false;
                             }
