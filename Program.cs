@@ -7,12 +7,7 @@ using System.Threading;
 class Program
 {
     static void Main(string[] args)
-    {   
-        ConsoleColor[] consoleColors =(ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor)); 
-        /*Console.WriteLine("List of available "+ "Console Colors:"); 
-        foreach(var color in consoleColors) 
-            Console.WriteLine(color);*/
-
+    { 
         bool isLooping = true;
         bool fromStart = true;
 
@@ -46,7 +41,6 @@ class Program
             Room room4 = new Room("", new List<Thing>());
             Room currentRoom = room1;
             string item = "Berlock";        //??
-
             
             room1.RoomDescription = "        --------------------------------------------------------------------------------------\n        ‡                 I rummet ser du en obäddad säng tvärs över rummet.                 ‡ \n        ‡          Till höger ser du en kamin med en blodig handduk hängande på tork.        ‡ \n        ‡             Till vänster ser du ett skrivbord med en uppslagen karta.              ‡ \n        ‡ Dörren bakom dig har slagit igen och låst sig. Du behöver hitta en annan väg ut... ‡ \n        --------------------------------------------------------------------------------------";
             
@@ -58,32 +52,32 @@ class Program
             
             room2.RoomDescription = "        ----------------------------------------------------------------------------------------\n        §         Du ser en säng, ett skrivbord och en TV som brusar med myrornas krig.        § \n        §       Under TV:n ser du ett gammalt supernintendo med två kontroller ikopplade.      § \n        §                           Framför TV:n ligger en sackosäck.                          § \n        §  Dörren bakom dig har slagit igen och låst sig. Du behöver hitta en annan väg ut...  § \n        ----------------------------------------------------------------------------------------";
             
-            room2.Things.Add(new Question("Vad heter Supermarios bror? \nA. Ludwig \nB. Pepparoni \nC. Luigi \nD. Bowser", "c", " Gå fram och kika på Supernintendot.", null));
-            room2.Things.Add(new Question("Vad har TV-spelsfiguren Pacman för färg? \nA. Grön \nB. Vit \nC. Röd \nD. Gul", "d", " Starta upp Tv:n.", room3));
-            room2.Things.Add(new Question("Vad heter hjälten i spelen Zelda? \nA. Link \nB. Law \nC. Mario \nD. Hero", "a", " Leta igenom byrån.", room3));
+            room2.Things.Add(new Question("Vad heter Supermarios bror? \nA. Ludwig \nB. Pepparoni \nC. Luigi \nD. Bowser", "c", " Gå fram och kika på Supernintendot.", room3));
             room2.Things.Add(new BadLuck("Du går till anslagstavlan och ser ett födelsedagskort...", " Gå fram till anslagstavlan över skrivbordet", room2));
+            room2.Things.Add(new Question("Vad har TV-spelsfiguren Pacman för färg? \nA. Grön \nB. Vit \nC. Röd \nD. Gul", "d", " Starta upp Tv:n.", room3));
             room2.Things.Add(new Surprise("Du fasstnar med blicken vid en book, vill du öppna den?", " Gå fram till bokhyllan och se vad det finns för böcker.", room2));
+            room2.Things.Add(new Question("Vad heter hjälten i spelen Zelda? \nA. Link \nB. Law \nC. Mario \nD. Hero", "a", " Leta igenom byrån.", room3));
             room2.Things.Add(new Backpack("Du plockar upp den och känner direkt en våg av nostalgi flöda över dig.", " Plocka upp en av spelkontrollerna.", room2, "Supermario-klistermärke"));
 
             
             room3.RoomDescription = "        ----------------------------------------------------------------------------------------\n        ‡    Du kommer in i ett ganska mörkt rum, upplyst endast av några svaga ljuskällor.    ‡ \n        ‡    Väggarna är täckta med bokhyllor av mörkt trä fyllda med gamla dammiga böcker.    ‡ \n        ‡      Mitt i rummet står en märkligt placerad sekretär som ser ut att vara låst.      ‡ \n        ‡  Det gamla trägolvet knakar under dig när du tar ytterligare några steg in i rummet. ‡  \n        ‡           I ena hörnet står ett litet bord bredvid en sliten skinnfåtölj.            ‡ \n        ‡   Dörren bakom dig slår igen och låser sig. Nu behöver du hitta en annan väg ut...   ‡ \n        ----------------------------------------------------------------------------------------";
             
-            room3.Things.Add(new Question("Vad heter Portugals huvudstad? \nA. Barcelona \nB. Lissabon \nC. Ankara \nD. Paris", "b", " Sök igenom en av bokhyllorna till häger om dig.", room4));
-            room3.Things.Add(new Question("Vilket år slutade andra världskriget? \nA. 1945 \nB. 1944 \nC. 1918 \nD. 1919", "a", " Gå fram till läshörnan med den slitna fåtöljen och det lilla bordet.", room4));
-            room3.Things.Add(new Question("Vem uppfann glödlampan? \nA. Alfred Nobel \nB. Johan Petter Johansson \nC. H.P Lovecraft \nD. Thomas Edison", "d", " Kika närmare på sekretären.", room4));
-            room3.Things.Add(new DeadEnd("Du kommer fram till papperskorgen, ", " Ta en titt i papperskorgen bredvid sekretären", room4));
             room3.Things.Add(new Backpack("Du hittar ett gammalt fotoalbum fyllt med foton av vad som ser ut att vara en familj nyss anlända till USA.", " Ta en titt i resten av bokyllorna", room3, "Fotoalbum"));
             room3.Things.Add(new BadLuck("Du snurrar på jordgloben och hör ett kras, globen faller till marken och går sönder...", " Inspektera jordgloben som står i hörnet.", room3));
+            room3.Things.Add(new Question("Vad heter Portugals huvudstad? \nA. Barcelona \nB. Lissabon \nC. Ankara \nD. Paris", "b", " Sök igenom en av bokhyllorna till häger om dig.", room4));
+            room3.Things.Add(new DeadEnd("Du kommer fram till papperskorgen, ", " Ta en titt i papperskorgen bredvid sekretären", room4));
+            room3.Things.Add(new Question("Vilket år slutade andra världskriget? \nA. 1945 \nB. 1944 \nC. 1918 \nD. 1919", "a", " Gå fram till läshörnan med den slitna fåtöljen och det lilla bordet.", room4));
+            room3.Things.Add(new Question("Vem uppfann glödlampan? \nA. Alfred Nobel \nB. Johan Petter Johansson \nC. H.P Lovecraft \nD. Thomas Edison", "d", " Kika närmare på sekretären.", room4));
             room3.Things.Add(new Backpack("När du öppnar locket ser du en skiftnyckel.", " Undersök den gamla kistan som står vid en av bokyllorna.", room3, "Skiftnyckel"));
 
             
             room4.RoomDescription = "        ------------------------------------------------------------------------------------------------------------------\n        ‡                        Ett svagt upplyst rum tonar fram med sammetsklädda stolar i rader                       ‡ \n        ‡   Väggarna är mörka med ljuddämpande material och tjocka gardiner hänger framför en upplyst duk längst fram.   ‡ \n        ‡                Ett starkt sken kommer från vad du bara antar är en projektor längst bak i rummet               ‡ \n        ‡                      Du hör ljudet knastra till och en nedräkning börjar ticka på filmduken                    ‡  \n        ‡                Dörren bakom dig slår igen och låser sig. Nu behöver du hitta en annan väg ut...                ‡ \n        ------------------------------------------------------------------------------------------------------------------";
             
+            room4.Things.Add(new Surprise("Du tittar ner och ruskar runt popcornen för att se om det ligger något i botten", " Du ser en halvfull popcornkartong", room4));
             room4.Things.Add(new Question("Vad heter skaparen bakom Star Wars-filmerna? \nA. J.R.R Tolkien \nB. Stephen King \nC. George Lukas \nD. George Michael", "c", " Titta klart på nedräkningen.", null));
+            room4.Things.Add(new Backpack("När du öppnar negativfodralet trillar inte en rulle ut utan det singlar ner massa gamla biobiljetter.", " Undersök en plåtlåda som det står KODAK på", room4, "En biobiljett"));
             room4.Things.Add(new Question("Den amerikanska succé sitcom serien “Vänner” sände sitt sista avsnitt år 2004. Vilket år började serien att sändas? \nA. 1995 \nB. 1994 \nC. 1998 \nD. 1999", "b", " Gå in i projektorrummet och leta vid filmrullarna.", null));
             room4.Things.Add(new Question("Serien om Pippi Långstrump från 1969 spelades in på Gotland. Vad heter Pippis pappa? \nA. Kapten Melker Långstrump \nB. Kapten Anton Långstrump \nC. Kapten Emil Långstrump \nD. Kapten Efraim Långstrump", "d", " Böj dig ner och titta under en av stolarna.", null));
-            room4.Things.Add(new Surprise("Du tittar ner och ruskar runt popcornen för att se om det ligger något i botten", " Du ser en halvfull popcornkartong", room4));
-            room4.Things.Add(new Backpack("När du öppnar negativfodralet trillar inte en rulle ut utan det singlar ner massa gamla biobiljetter.", " Undersök en plåtlåda som det står KODAK på", room4, "En biobiljett"));
 
 
                 switch (input)
@@ -96,10 +90,28 @@ class Program
                             {
                                 Console.WriteLine("Grattis! Du har klarat av alla frågor och vunnit spelet!");
                                 Highscore highscoreInstance = new Highscore("", 0, 0);
-                                highscoreInstance.Add(start);
+                                highscoreInstance.Adds(start);
                                 // Skriv ut hur många items man hittat 
-                                isLooping = false;
-                                fromStart = false;
+                                
+                                Console.Write("Vill du spela igen j/n?");
+                                string keepGoing = Console.ReadLine();
+                                   
+                                if (keepGoing == "j")
+                                {
+                                    Console.WriteLine("Då kör vi en gång till!");
+                                    Console.WriteLine();
+                                    break;
+                                }
+                                else if (keepGoing == "n")
+                                {
+                                    Console.WriteLine("Bra spelat, hejdå!");
+                                    isLooping = false;
+                                    fromStart = false;
+                                }
+                                else //Går tillbaka till "Grattis du vann".... 
+                                {
+                                    Console.WriteLine("Ogiltig input...");
+                                }
                             }
                             else if(playerLives == 0)
                             {
@@ -126,6 +138,8 @@ class Program
                         }
                         break;
                     case "2":
+                        Highscore highscoreList = new Highscore("", 0, 0);
+                        highscoreList.Print();
                         break;
                     case "3":
                         Console.WriteLine("Hejdå");

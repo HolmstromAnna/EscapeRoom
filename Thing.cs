@@ -21,7 +21,7 @@ public class DeadEnd : Thing
     }
     public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
     {        
-        Console.Write(" Här finns ingenting.");
+        Console.Write("Här finns ingenting.");
         Console.WriteLine();
         Console.ReadLine();
         return (currentRoom, playerLives);
@@ -33,8 +33,10 @@ public class BadLuck : Thing
     public BadLuck (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
     }
     public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
-    {        
+    {    
+        Console.ForegroundColor = ConsoleColor.Red;    
         Console.WriteLine("Du förlorar ett liv...");
+        Console.ForegroundColor = ConsoleColor.White;
         playerLives--;
         Console.WriteLine($"Otur, du har nu bara {playerLives} liv kvar...");
         Console.WriteLine();
@@ -48,8 +50,10 @@ public class Surprise : Thing
     public Surprise (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
     }
     public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
-    {        
-        Console.WriteLine("Woho, du hittar ett liv!");
+    {   
+        Console.ForegroundColor = ConsoleColor.Blue;     
+        Console.WriteLine("Wooho, du hittar ett liv!");
+        Console.ForegroundColor = ConsoleColor.White;
         if (playerLives == 5)
         {
             Console.WriteLine("Du kan bara ha fem liv");
@@ -79,17 +83,23 @@ public class Question : Thing
         if(userAns == CorrectAnswer)
         {
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Rätt!");
+            Console.ForegroundColor = ConsoleColor.White;
             return (NextRoom, playerLives);
         }
         else
         {
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Fel svar");
+            Console.ForegroundColor = ConsoleColor.White;
             if(playerLives == 1)
              {
                 playerLives--;
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine("GAME OVER!");
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine();     
                 return (currentRoom, playerLives);
              }
@@ -97,17 +107,6 @@ public class Question : Thing
             Console.WriteLine($"Du har nu {playerLives} liv kvar...");
             return (currentRoom, playerLives);
         }
-    }
-}
-
-public class Room
-{
-    public string RoomDescription;
-    public List <Thing> Things; 
-    public Room (string roomDescription, List <Thing> things)
-    {
-        RoomDescription = roomDescription;
-        Things = things;
     }
 }
 
@@ -124,7 +123,9 @@ public class Backpack : Thing
     {        
         Console.ReadKey();
         //Thread.Sleep(5000);
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"Woohoo! Du hittade: {Item}");
+        Console.ForegroundColor = ConsoleColor.White;
         if (Items.Contains(Item))
         {
             Console.WriteLine($"Du har redan hittat föremålet som fanns här!");
@@ -140,50 +141,3 @@ public class Backpack : Thing
         return (currentRoom, playerLives);
     }
 }
-public class Highscore
-{
-    public string UserName;
-    public int Minutes; 
-    public int Seconds;
-    List <Highscore> Highscores;
-
-    public Highscore(string userName, int minutes, int seconds)
-    {
-        UserName = userName;
-        Minutes = minutes;
-        Seconds = seconds;
-        
-        Highscores = new List<Highscore>(5);
-    }
-    public void Add(int start)
-    {
-        int totalMillisec = Environment.TickCount - start; 
-        int totalSeconds = totalMillisec / 1000;
-        int minutes = totalSeconds / 60;
-        int seconds = totalSeconds % 60;
-
-        Console.WriteLine($"Tid: {minutes} minuter {seconds} sekunder"); 
-        Console.Write("Skriv in ditt namn: ");
-        UserName = Console.ReadLine();
-
-    }
-
-
-    
-}
-
-
-
-
-
-/* public void Add(string playerName, int playerPoints)
-    {
-        var newItem = new HSItem(playerName, playerPoints);
-        hs.Add(newItem);
-
-        hs.Sort((x, y) => y.points.CompareTo(x.points));
-
-        if (hs.Count > maxInList)
-        {
-            hs.RemoveAt(maxInList);
-        }*/
