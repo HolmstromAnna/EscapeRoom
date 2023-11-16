@@ -1,3 +1,4 @@
+using System.Text.Json;
 public class Highscore
 {
     public string UserName;
@@ -5,28 +6,30 @@ public class Highscore
     public int FinalSeconds;
     List <Highscore> Highscores;
 
-    public Highscore(string userName, int minutes, int seconds)
+    public Highscore(string userName, int finalMinutes, int finalSeconds)
     {
         UserName = userName;
-        FinalMinutes = minutes;
-        FinalSeconds = seconds;
-        
-        Highscores = new List<Highscore>(3);
+        FinalMinutes = finalMinutes;
+        FinalSeconds = finalSeconds;
+        Highscores = new List<Highscore>();
     }
     public void Adds(int start)
     {
         int totalMillisec = Environment.TickCount - start; 
         int totalSeconds = totalMillisec / 1000;
-        int minutes = totalSeconds / 60;
-        int seconds = totalSeconds % 60;
+        FinalMinutes = totalSeconds / 60;
+        FinalSeconds = totalSeconds % 60;
 
         Console.WriteLine();
-        Console.WriteLine($"Din tid: {minutes} minuter {seconds} sekunder"); 
+        Console.WriteLine($"Tid: {FinalMinutes} minuter {FinalSeconds} sekunder"); 
         Console.Write("Skriv in ditt namn: ");
         UserName = Console.ReadLine();
         
-        Highscore newHighscore = new Highscore(UserName, minutes, seconds);
-        Highscores.Add(newHighscore);
+        Highscore newScore = new Highscore(UserName, FinalMinutes, FinalSeconds);
+        Highscores.Add(newScore);
+
+       // string strJson = JsonSerializer.Serialize(Highscores, new JsonSerializerOptions { WriteIndented = true });
+       // File.WriteAllText("highscores.json", strJson);
 
         Highscores.Sort((x, y) =>
         {
@@ -48,19 +51,16 @@ public class Highscore
         for (int i = 0; i < Highscores.Count; i++)
         {
             Console.WriteLine();
-            Console.WriteLine($"Användare: {Highscores[i].UserName}. Minuter: {Highscores[i].FinalMinutes}. Sekunder: {Highscores[i].FinalSeconds}");
+            Console.WriteLine($"{Highscores[i].UserName} Tid: {Highscores[i].FinalMinutes} minuter {Highscores[i].FinalSeconds} sekunder");
             Console.WriteLine();
         }
         //Tillbaka till menyn
     }
     public void Print()
     {
-        Highscore newHighscore = new Highscore("sandra", 1, 10);
-        Highscores.Add(newHighscore);
-        newHighscore = new Highscore("Anna", 0, 10);
-        Highscores.Add(newHighscore);
-        newHighscore = new Highscore("Louise", 2, 10);
-        Highscores.Add(newHighscore);
+       // string strJson = File.ReadAllText("highscores.json");
+       // List<Highscore> Highscores;
+       // Highscores = JsonSerializer.Deserialize<List<Highscore>>(strJson);
 
         Highscores.Sort((x, y) =>
         {
@@ -82,7 +82,7 @@ public class Highscore
         //Skriver ut listan
         for (int i = 0; i < Highscores.Count; i++)
         {
-            Console.WriteLine($"{i+1}:a plats: {Highscores[i].UserName}, Minuter: {Highscores[i].FinalMinutes}. Sekunder: {Highscores[i].FinalSeconds}");
+            Console.WriteLine($"{i+1}:a plats: {Highscores[i].UserName}, Tid: {Highscores[i].FinalMinutes} minuter {Highscores[i].FinalSeconds} sekunder");
             Console.WriteLine();
         }
     }

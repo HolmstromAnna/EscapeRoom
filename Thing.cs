@@ -53,7 +53,7 @@ public class Surprise : Thing
     {   
         Console.ForegroundColor = ConsoleColor.Blue;     
         Console.WriteLine("Wooho, du hittar ett liv!");
-        Console.ForegroundColor = ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.White; 
         if (playerLives == 5)
         {
             Console.WriteLine("Du kan bara ha fem liv");
@@ -117,7 +117,6 @@ public class Backpack : Thing
     public Backpack (string description, string pathChoice, Room nextRoom, string item) : base(description, pathChoice, nextRoom)
     {
         Item = item;
-        Items = new List<string>();
     }
     public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
     {        
@@ -135,6 +134,10 @@ public class Backpack : Thing
             Items.Add(Item);
             Console.WriteLine($"Tillagd i ryggäcken: {Item}.");
         }
+        for (int i = 0; i < Items.Count; i++)
+            {
+                Console.WriteLine(Items[i]);
+            }
         Console.ReadKey();
         //Thread.Sleep(6000);
         Console.WriteLine();
