@@ -12,14 +12,14 @@ public abstract class Thing    //ett bättre namn?
         PathChoice = pathChoice;
         NextRoom = nextRoom;
     }
-    public abstract (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item);
+    public abstract (Room, int playerLives) Interact(Room currentRoom, int playerLives, List<string> Items);
 }
 
 public class DeadEnd : Thing
 {
     public DeadEnd (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
     }
-    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, List<string> Items)
     {        
         Console.Write("Här finns ingenting.");
         Console.WriteLine();
@@ -32,7 +32,7 @@ public class BadLuck : Thing
 {
     public BadLuck (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
     }
-    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, List<string> Items)
     {    
         Console.ForegroundColor = ConsoleColor.Red;    
         Console.WriteLine("Du förlorar ett liv...");
@@ -49,7 +49,7 @@ public class Surprise : Thing
 {
     public Surprise (string description, string pathChoice, Room nextRoom) : base(description, pathChoice, nextRoom){
     }
-    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, List<string> Items)
     {   
         Console.ForegroundColor = ConsoleColor.Blue;     
         Console.WriteLine("Wooho, du hittar ett liv!");
@@ -76,7 +76,7 @@ public class Question : Thing
     {
         CorrectAnswer = correctAnswer;
     }
-    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, List<string> Items)
     {
         Console.Write("Ditt val: ");
         string? userAns = Console.ReadLine();
@@ -113,12 +113,12 @@ public class Question : Thing
 public class Backpack : Thing
 {
     public string Item;
-    public List<string> Items;
+    
     public Backpack (string description, string pathChoice, Room nextRoom, string item) : base(description, pathChoice, nextRoom)
     {
         Item = item;
     }
-    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, string item)
+    public override (Room, int playerLives) Interact(Room currentRoom, int playerLives, List<string> Items)
     {        
         Console.ReadKey();
         //Thread.Sleep(5000);

@@ -1,3 +1,17 @@
 [
-  {}
+  {
+    "UserName": "Anna",
+    "FinalMinutes": 0,
+    "FinalSeconds": 8
+  },
+  {
+    "UserName": "Louise",
+    "FinalMinutes": 0,
+    "FinalSeconds": 12
+  },
+  {
+    "UserName": "Sandra",
+    "FinalMinutes": 0,
+    "FinalSeconds": 19
+  }
 ]

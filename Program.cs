@@ -19,12 +19,6 @@ class Program
         Console.ForegroundColor = ConsoleColor.White;
         Console.ReadLine();
         
-
-        //Börjar med att skriva in sitt namn (Vad gör vi med namnet?) Namnet och tid hänger ihop
-        //med samma index. Klass user/highscore
-        //Användare med namn och tid (utökad item)
-        //Måste vinna för att vara med på highscore-lista
-
         while (fromStart)
         {
             Console.WriteLine("1. Spela");
@@ -41,9 +35,8 @@ class Program
             Room room3 = new Room("", new List<Thing>());
             Room room4 = new Room("", new List<Thing>());
             Room currentRoom = room1;
-           // Backpack Items = new Backpack( new List<string>());
-            string item = "Berlock";        //??
-            
+            List<string> hej = new List<string>();
+               
             room1.RoomDescription = "        --------------------------------------------------------------------------------------\n        ‡                 I rummet ser du en obäddad säng tvärs över rummet.                 ‡ \n        ‡          Till höger ser du en kamin med en blodig handduk hängande på tork.        ‡ \n        ‡             Till vänster ser du ett skrivbord med en uppslagen karta.              ‡ \n        ‡ Dörren bakom dig har slagit igen och låst sig. Du behöver hitta en annan väg ut... ‡ \n        --------------------------------------------------------------------------------------";
             
             room1.Things.Add(new Question("Vilket var den vanligaste typen av mordvapen i Sverige 2022? \nA. Kniv \nB. Pilbåge \nC. Skjutvapen", "c", " Lyft täcket på den obäddade sängen i hörnet", room2));
@@ -54,7 +47,7 @@ class Program
             
             room2.RoomDescription = "        ----------------------------------------------------------------------------------------\n        §         Du ser en säng, ett skrivbord och en TV som brusar med myrornas krig.        § \n        §       Under TV:n ser du ett gammalt supernintendo med två kontroller ikopplade.      § \n        §                           Framför TV:n ligger en sackosäck.                          § \n        §  Dörren bakom dig har slagit igen och låst sig. Du behöver hitta en annan väg ut...  § \n        ----------------------------------------------------------------------------------------";
             
-            room2.Things.Add(new Question("Vad heter Supermarios bror? \nA. Ludwig \nB. Pepparoni \nC. Luigi \nD. Bowser", "c", " Gå fram och kika på Supernintendot", room3));
+            room2.Things.Add(new Question("Vad heter Supermarios bror? \nA. Ludwig \nB. Pepparoni \nC. Luigi \nD. Bowser", "c", " Gå fram och kika på Supernintendot", null));
             room2.Things.Add(new BadLuck("Du går till anslagstavlan och ser ett födelsedagskort...", " Gå fram till anslagstavlan över skrivbordet", room2));
             room2.Things.Add(new Question("Vad har TV-spelsfiguren Pacman för färg? \nA. Grön \nB. Vit \nC. Röd \nD. Gul", "d", " Starta upp Tv:n", room3));
             room2.Things.Add(new Surprise("Du fasstnar med blicken vid en book, vill du öppna den?", " Gå fram till bokhyllan och se vad det finns för böcker", room2));
@@ -91,8 +84,8 @@ class Program
                             if(currentRoom == null)
                             {
                                 Console.WriteLine("Grattis! Du har klarat av alla frågor och vunnit spelet!");
-                                Highscore highscoreInstance = new Highscore("", 0, 0);
-                                highscoreInstance.Adds(start);
+                                HighscoreManager h = new HighscoreManager();
+                                h.Adds(start);
                                 // Skriv ut hur många items man hittat 
                                 
                                 Console.Write("Vill du spela igen j/n?");
@@ -135,13 +128,13 @@ class Program
                                 //Felhantering???????
                                 Console.WriteLine(currentRoom.Things[userChoice -1].Description); // Skriver ut rätt fråga / beskrivning(dead end)
                                 Console.WriteLine();
-                                (currentRoom, playerLives) = currentRoom.Things[userChoice -1].Interact(currentRoom, playerLives, item);  //Går in i Question.Interact och kollar om det är rätt eller fel
+                                (currentRoom, playerLives) = currentRoom.Things[userChoice -1].Interact(currentRoom, playerLives, hej);  //Går in i Question.Interact och kollar om det är rätt eller fel
                             }
                         }
                         break;
                     case "2":
-                        Highscore highscoreList = new Highscore("", 0, 0);
-                        highscoreList.Print();
+                        HighscoreManager hi = new HighscoreManager();
+                        hi.Print();
                         break;
                     case "3":
                         Console.WriteLine("Hejdå");
